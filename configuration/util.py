@@ -17,6 +17,10 @@ def install_software():
 def systemd_init():
     pass
 
+# Links all software from local repo to correct system location
+def link():
+    pass
+
 # Runner command to be exported by main
 def run_all():
     pass
