@@ -1,0 +1,258 @@
+-- TODO:
+----Figure out tag list and jump list
+----Add Telescope
+----Add lua snippets
+----Make packer use a floating window
+----Add tab completion to cmp
+----Make my own pop up for shortcuts
+----DAP
+----Git Integration
+----Auto format code
+----Better window navigation?
+----Easier finding words
+----Custom greeter
+----Add greeter
+----treesitter
+----cmp-git?
+----cmp-dadbod for database completion
+----cmp-spell checking - null ls
+
+-- Set options
+vim.opt.softtabstop = 4
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.relativenumber = true
+vim.opt.number = true
+vim.opt.hlsearch = false
+vim.opt.hidden = true
+vim.opt.errorbells = false
+vim.opt.wrap = false
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = "/home/david/.vim/undodir"
+vim.opt.undofile = true
+vim.opt.incsearch = true
+vim.opt.termguicolors = true
+vim.opt.scrolloff = 8
+vim.opt.colorcolumn = "80"
+vim.opt.signcolumn = "yes"
+vim.opt.updatetime = 100
+vim.opt.encoding = "utf-8"
+vim.opt.showtabline = 2
+vim.opt.ruler = true
+vim.opt.clipboard = "unnamedplus"
+vim.opt.timeoutlen = 300
+vim.opt.mouse = "a"
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
+-- Key remaps
+local opts = { noremap = true, silent = true }
+local keymap = vim.api.nvim_set_keymap
+
+vim.g.mapleader = " "
+
+-- Remap nav keys on to the right
+keymap("n", ";", "l", opts)
+keymap("n", "l", "k", opts)
+keymap("n", "k", "j", opts)
+keymap("n", "j", "h", opts)
+
+keymap("v", ";", "l", opts)
+keymap("v", "l", "k", opts)
+keymap("v", "k", "j", opts)
+keymap("v", "j", "h", opts)
+
+keymap("i", "jk", "<ESC>", opts)
+keymap("i", "kj", "<ESC>", opts)
+keymap("v", "jk", "<ESC>", opts)
+keymap("v", "kj", "<ESC>", opts)
+
+-- Better tabbing
+keymap("v", "<", "<gv", opts)
+keymap("v", ">", ">gv", opts)
+
+
+-- Gotta make it stylish af
+local colorscheme = "gruvbox"
+
+local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+if not status_ok then
+    vim.notify("colorscheme " .. colorscheme .. " not found!")
+    return
+end
+
+-- Lualine
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'gruvbox_dark',
+    component_separators = { left = '|', right = '|'},
+    section_separators = { left = '', right = ''},
+    always_divide_middle = true,
+    globalstatus = false,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+}
+-- Telescope
+
+
+-- CMP Completion
+vim.opt.completeopt = {"menu", "menuone", "noselect"}
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+-- Setup nvim-cmp.
+local cmp = require'cmp'
+
+cmp.setup({
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
+    },
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    }),
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+    },   {
+        { name = 'buffer' },
+        { name = 'path' },
+        { name = 'luasnip' },
+    })
+})
+
+-- LSP
+
+custom_attach = function()
+    -- shows information window about what you are hovering over
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0})
+    -- goes to definition
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, {buffer=0})
+    -- gives you the type definition
+    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {buffer=0})
+    -- rename variables, might have to hit :wa after you run this
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {buffer=0})
+    -- got to next issue in buffer
+    vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next, {buffer=0})
+    -- got to next issue in buffer
+    vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev, {buffer=0})
+    -- code actions
+    vim.keymap.set("n", "cd", vim.lsp.buf.code_action, {buffer=0})
+
+    -- vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", {buffer=0})
+end
+
+-- Python
+require'lspconfig'.pyright.setup{
+    capabilities = capabilities,
+    on_attach = custom_attach,
+}
+
+
+-- C++/C
+require'lspconfig'.clangd.setup{
+    capabilities = capabilities,
+    on_attach = custom_attach,
+}
+
+-- Rust
+require'lspconfig'.rust_analyzer.setup{
+    capabilities = capabilities,
+    on_attach = custom_attach,
+}
+
+-- Golang
+require'lspconfig'.gopls.setup{
+    capabilities = capabilities,
+    on_attach = custom_attach,
+}
+
+-- Bash
+require'lspconfig'.bashls.setup{
+    capabilities = capabilities,
+    on_attach = custom_attach,
+}
+
+-- Lua
+local sumneko_binary_path = vim.fn.exepath('lua-language-server')
+local sumneko_root_path = vim.fn.fnamemodify(sumneko_binary_path, ':h:h:h')
+
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
+require'lspconfig'.sumneko_lua.setup{
+    capabilities = capabilities,
+    on_attach = custom_attach,
+    cmd = {sumneko_binary_path, "-E", sumneko_root_path .. "/main.lua"};
+    settings = {
+        Lua = {
+        runtime = {
+            version = 'LuaJIT',
+            path = runtime_path,
+        },
+        diagnostics = {
+            globals = {'vim'},
+        },
+        workspace = {
+            library = vim.api.nvim_get_runtime_file("", true),
+        },
+        telemetry = {
+            enable = false,
+        },
+        },
+    },
+}
+
+-- Plugins
+local fn = vim.fn
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+    packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+end
+
+return require('packer').startup(function(use)
+    use "wbthomason/packer.nvim"
+    use "nvim-lua/popup.nvim"
+    use "nvim-lua/plenary.nvim"
+
+    use "gruvbox-community/gruvbox"
+    use "ap/vim-css-color"
+
+    use "romgrk/barbar.nvim" -- replace with a different one
+    use "jiangmiao/auto-pairs" -- Get a different one
+    use 'nvim-lualine/lualine.nvim'
+    use "kyazdani42/nvim-web-devicons"
+
+    use "neovim/nvim-lspconfig"
+    use "hrsh7th/nvim-cmp"
+    use 'hrsh7th/cmp-nvim-lsp'
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-path"
+    use "saadparwaiz1/cmp_luasnip"
+    use "L3MON4D3/LuaSnip"
+    use "rafamadriz/friendly-snippets"
+
+    if packer_bootstrap then
+        require('packer').sync()
+    end
+end)
