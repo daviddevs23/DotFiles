@@ -10,13 +10,14 @@
 ----Better window navigation - nvim window
 ----Easier finding words
 ----figure out what is going on with replace
-----Add greeter
+----Add greeter - dashboard-nvim
 ----treesitter
 ----cmp-git
 ----cmp-dadbod for database completion
 ----cmp-spell checking - null ls
 ----discord presence
 ----better auto pairs for brackets and stuff
+----Add a terminal of some kind
 
 -- Set options
 vim.opt.softtabstop = 4
@@ -286,6 +287,7 @@ return require('packer').startup(function(use)
         'romgrk/barbar.nvim',
         requires = {'kyazdani42/nvim-web-devicons'}
     }
+    packer.use {'glepnir/dashboard-nvim'}
 
     use "neovim/nvim-lspconfig"
     use "hrsh7th/nvim-cmp"

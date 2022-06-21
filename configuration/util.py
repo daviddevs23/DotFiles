@@ -1,26 +1,44 @@
 # The file that actually contains all of the commands to run things
+import subprocess
+from software import software
+from systemd import systemd
 
 # Function to run a shell command
-# Does do checks to make sure software was actually installed
 def run_command(command):
-    pass
+    process = subprocess.run(command.split(" "))
+    return process
 
 # Install yay to install everything else
 def install_yay():
-    pass
+    url = "https://aur.archlinux.org/yay.git"
+    process = ""
+
+    # Make sure that git is installed
+    process = run_command(f"cd; sudo pacman -S git; git clone {url}; cd yay; makepkg -si; cd")
+
+    return process
 
 # Uses yay to install everyting in software
 def install_software():
-    pass
+    packages = ""
+    for package in software:
+        packages = packages + package + " "
+
+    return run_command(f"yay -S {packages}")
 
 # Command used to start/enable systemd services
 def systemd_init():
-    pass
+    process = ""
+    for unit in systemd:
+        if unit[1] == "enabled":
+            process += str(run_command(f"sudo systemctl enable {unit[0]}"))
 
-# Links all software from local repo to correct system location
-def link():
-    pass
+        if unit[2] == "start":
+            process += str(run_command(f"sudo systemctl start {unit[0]}"))
 
-# Runner command to be exported by main
-def run_all():
-    pass
+    return process
+
+# Copy all software from local repo to correct system location
+def copy_files(source, destination):
+    return run_command(f"cp {source} {destination}")
+
