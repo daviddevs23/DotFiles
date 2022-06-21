@@ -2,20 +2,21 @@
 ----Figure out tag list and jump list
 ----Add Telescope
 ----Add lua snippets
-----Make packer use a floating window
 ----Add tab completion to cmp
-----Make my own pop up for shortcuts
+----Make my own pop up for shortcuts like cheatsheet
 ----DAP
 ----Git Integration
 ----Auto format code
-----Better window navigation?
+----Better window navigation - nvim window
 ----Easier finding words
-----Custom greeter
+----figure out what is going on with replace
 ----Add greeter
 ----treesitter
-----cmp-git?
+----cmp-git
 ----cmp-dadbod for database completion
 ----cmp-spell checking - null ls
+----discord presence
+----better auto pairs for brackets and stuff
 
 -- Set options
 vim.opt.softtabstop = 4
@@ -47,6 +48,11 @@ vim.opt.timeoutlen = 300
 vim.opt.mouse = "a"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+
+
+-- Greeter with alpha-nvim
+-- pass
+
 
 -- Key remaps
 local opts = { noremap = true, silent = true }
@@ -103,7 +109,31 @@ require('lualine').setup {
     lualine_z = {'location'}
   },
 }
--- Telescope
+
+-- Barbar
+-- Move to previous/next
+keymap('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
+keymap('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
+-- Goto buffer in position...
+keymap('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
+keymap('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
+keymap('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
+keymap('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
+keymap('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)
+keymap('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', opts)
+keymap('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', opts)
+keymap('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
+keymap('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
+keymap('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
+-- Close buffer
+keymap('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
+-- Magic buffer-picking mode
+keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
+-- Sort automatically by...
+keymap('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
+keymap('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
+keymap('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
+keymap('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 
 
 -- CMP Completion
@@ -230,6 +260,17 @@ if fn.empty(fn.glob(install_path)) > 0 then
     packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
+-- Make packer run in a popup window
+local _, packer = pcall(require, "packer")
+packer.init {
+    display = {
+        open_fn = function()
+            return require("packer.util").float { border = "rounded" }
+        end,
+    },
+}
+
+-- Plugins to install
 return require('packer').startup(function(use)
     use "wbthomason/packer.nvim"
     use "nvim-lua/popup.nvim"
@@ -238,10 +279,13 @@ return require('packer').startup(function(use)
     use "gruvbox-community/gruvbox"
     use "ap/vim-css-color"
 
-    use "romgrk/barbar.nvim" -- replace with a different one
     use "jiangmiao/auto-pairs" -- Get a different one
     use 'nvim-lualine/lualine.nvim'
     use "kyazdani42/nvim-web-devicons"
+    use {
+        'romgrk/barbar.nvim',
+        requires = {'kyazdani42/nvim-web-devicons'}
+    }
 
     use "neovim/nvim-lspconfig"
     use "hrsh7th/nvim-cmp"
