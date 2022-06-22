@@ -11,12 +11,9 @@ def run_command(command):
 # Install yay to install everything else
 def install_yay():
     url = "https://aur.archlinux.org/yay.git"
-    process = ""
-
     # Make sure that git is installed
-    process = run_command(f"cd; sudo pacman -S git; git clone {url}; cd yay; makepkg -si; cd")
+    return run_command(f"cd; git clone {url}; cd yay; makepkg -si; cd")
 
-    return process
 
 # Uses yay to install everyting in software
 def install_software():
@@ -39,6 +36,5 @@ def systemd_init():
     return process
 
 # Copy all software from local repo to correct system location
-def copy_files(source, destination):
-    return run_command(f"cp {source} {destination}")
-
+def link_files(source, destination):
+    return run_command(f"ln -f {source} {destination}")

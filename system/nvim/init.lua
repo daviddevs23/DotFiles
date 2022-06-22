@@ -2,7 +2,6 @@
 ----Figure out tag list and jump list
 ----Add Telescope
 ----Add lua snippets
-----Add tab completion to cmp
 ----Make my own pop up for shortcuts like cheatsheet
 ----DAP
 ----Git Integration
@@ -10,7 +9,7 @@
 ----Better window navigation - nvim window
 ----Easier finding words
 ----figure out what is going on with replace
-----Add greeter - dashboard-nvim
+----Improve greeter - more options after I add telescope
 ----treesitter
 ----cmp-git
 ----cmp-dadbod for database completion
@@ -45,15 +44,62 @@ vim.opt.encoding = "utf-8"
 vim.opt.showtabline = 2
 vim.opt.ruler = true
 vim.opt.clipboard = "unnamedplus"
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 200
 vim.opt.mouse = "a"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
-
--- Greeter with alpha-nvim
--- pass
-
+-- dashboard-nvim
+local db = require('dashboard')
+db.custom_header = {
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '.__   __.  _______   ______   ____    ____  __  .___  ___.',
+    '|  \\ |  | |   ____| /  __  \\  \\   \\  /   / |  | |   \\/   |',
+    '|   \\|  | |  |__   |  |  |  |  \\   \\/   /  |  | |  \\  /  |',
+    '|  . `  | |   __|  |  |  |  |   \\      /   |  | |  |\\/|  |',
+    '|  |\\   | |  |____ |  `--\'  |    \\    /    |  | |  |  |  |',
+    '|__| \\__| |_______| \\______/      \\__/     |__| |__|  |__|',
+    '',
+    '',
+}
+db.custom_footer = {icon='', desc='', action=''}
+db.custom_center = {
+    {icon = '  ',
+    desc = 'New File                                ',
+    action ='SessionLoad'},
+    -- {icon = '  ',
+    -- desc = 'Recently latest session                 ',
+    -- action ='SessionLoad'},
+    -- {icon = '  ',
+    -- desc = 'Recently opened files                   ',
+    -- action =  'DashboardFindHistory',
+    -- {icon = '  ',
+    -- desc = 'Find  File                              ',
+    -- action = 'Telescope find_files find_command=rg,--hidden,--files',
+    -- {icon = '  ',
+    -- desc ='File Browser                            ',
+    -- action =  'Telescope file_browser',
+    -- {icon = '  ',
+    -- desc = 'Find  word                              ',
+    -- action = 'Telescope live_grep',
+    -- {icon = '  ',
+    -- desc = 'Open Personal dotfiles                  ',
+    -- action = 'Telescope dotfiles path=' .. home ..'/.dotfiles',
+    -- shortcut = 'SPC f d'},
+}
 
 -- Key remaps
 local opts = { noremap = true, silent = true }
@@ -160,6 +206,8 @@ cmp.setup({
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<Tab>'] = cmp.mapping.select_next_item(),
+        ['<S-Tab>'] = cmp.mapping.select_prev_item(),
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
@@ -172,7 +220,6 @@ cmp.setup({
 })
 
 -- LSP
-
 custom_attach = function()
     -- shows information window about what you are hovering over
     vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0})
