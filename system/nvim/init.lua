@@ -7,13 +7,11 @@
 ----Git Integration
 ----Better window navigation - nvim window
 ----Easier finding words
-----Improve greeter - more options after I add telescope
 ----treesitter
 ----cmp-git
 ----cmp-dadbod for database completion
 ----cmp-spell checking - null ls
 ----better auto pairs for brackets and stuff
-----Add a terminal of some kind
 
 -- Set options
 vim.opt.softtabstop = 4
@@ -48,57 +46,6 @@ vim.opt.splitright = true
 vim.g.loglevel = "debug"
 vim.g.presenceloglevel = "debug"
 
--- dashboard-nvim
-local db = require('dashboard')
-db.custom_header = {
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '.__   __.  _______   ______   ____    ____  __  .___  ___.',
-    '|  \\ |  | |   ____| /  __  \\  \\   \\  /   / |  | |   \\/   |',
-    '|   \\|  | |  |__   |  |  |  |  \\   \\/   /  |  | |  \\  /  |',
-    '|  . `  | |   __|  |  |  |  |   \\      /   |  | |  |\\/|  |',
-    '|  |\\   | |  |____ |  `--\'  |    \\    /    |  | |  |  |  |',
-    '|__| \\__| |_______| \\______/      \\__/     |__| |__|  |__|',
-    '',
-    '',
-}
-db.custom_footer = { icon = '', desc = '', action = '' }
-db.custom_center = {
-    { icon = '  ',
-        desc = 'New File                                ',
-        action = 'SessionLoad' },
-    -- {icon = '  ',
-    -- desc = 'Recently latest session                 ',
-    -- action ='SessionLoad'},
-    -- {icon = '  ',
-    -- desc = 'Recently opened files                   ',
-    -- action =  'DashboardFindHistory',
-    -- {icon = '  ',
-    -- desc = 'Find  File                              ',
-    -- action = 'Telescope find_files find_command=rg,--hidden,--files',
-    -- {icon = '  ',
-    -- desc ='File Browser                            ',
-    -- action =  'Telescope file_browser',
-    -- {icon = '  ',
-    -- desc = 'Find  word                              ',
-    -- action = 'Telescope live_grep',
-    -- {icon = '  ',
-    -- desc = 'Open Personal dotfiles                  ',
-    -- action = 'Telescope dotfiles path=' .. home ..'/.dotfiles',
-    -- shortcut = 'SPC f d'},
-}
 
 -- Key remaps
 local opts = { noremap = true, silent = true }
@@ -301,33 +248,39 @@ require 'lspconfig'.sumneko_lua.setup {
     },
 }
 
+-- toggle term
+require("toggleterm").setup {
+    open_mapping = [[<c-\>]],
+    direction = 'horizontal',
+    size = vim.fn.winheight(0) / 3,
+}
+
 -- discord presence
 require("presence"):setup({
-    -- General options
-    auto_update        = true, -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
-    neovim_image_text  = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
-    main_image         = "neovim", -- Main image display (either "neovim" or "file")
-    client_id          = "793271441293967371", -- Use your own Discord application client id (not recommended)
-    log_level          = nil, -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
-    debounce_timeout   = 10, -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
-    enable_line_number = false, -- Displays the current line number instead of the current project
-    blacklist          = {}, -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
-    buttons            = true, -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`, or a function(buffer: string, repo_url: string|nil): table)
-    file_assets        = {}, -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
-    editing_text        = nil, -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
-    file_explorer_text  = nil, -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
-    git_commit_text     = nil, -- Format string rendered when committing changes in git (either string or function(filename: string): string)
-    plugin_manager_text = nil, -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
-    reading_text        = nil, -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: string): string)
-    workspace_text      = nil, -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
-    line_number_text    = nil, -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
+    auto_update         = true,
+    neovim_image_text   = "The One True Text Editor",
+    main_image          = "neovim",
+    client_id           = "793271441293967371",
+    log_level           = nil,
+    debounce_timeout    = 10,
+    enable_line_number  = false,
+    blacklist           = {},
+    buttons             = true,
+    file_assets         = {},
+    editing_text        = nil,
+    file_explorer_text  = nil,
+    git_commit_text     = nil,
+    plugin_manager_text = nil,
+    reading_text        = nil,
+    workspace_text      = nil,
+    line_number_text    = nil,
 })
 
 -- Plugins
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
+    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
         install_path })
 end
 
@@ -357,7 +310,6 @@ return require('packer').startup(function(use)
         'romgrk/barbar.nvim',
         requires = { 'kyazdani42/nvim-web-devicons' }
     }
-    packer.use { 'glepnir/dashboard-nvim' }
 
     use "neovim/nvim-lspconfig"
     use "hrsh7th/nvim-cmp"
@@ -369,6 +321,9 @@ return require('packer').startup(function(use)
     use "rafamadriz/friendly-snippets"
 
     use 'andweeb/presence.nvim'
+    use { "akinsho/toggleterm.nvim", tag = 'v1.*', config = function()
+        require("toggleterm").setup()
+    end }
 
     if packer_bootstrap then
         require('packer').sync()
