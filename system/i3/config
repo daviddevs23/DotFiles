@@ -14,6 +14,7 @@ set $mod Mod4
 # Basic setup scripts
 exec --no-startup-id "/usr/bin/xrandr --output HDMI-0 --mode 1920x1080 --rate 60.00 --pos 0x0 --rotate left --dpi 90 --output DP-2 --primary --mode 2560x1440 --rate 60 --pos 1080x0 --rotate normal --dpi 161 --output DP-1 --mode 1920x1080 --rate 60.00 --pos 3640x180 --dpi 92"
 exec --no-startup-id "/usr/bin/nitrogen --restore"
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh &
 
 
 # Font for window titles.
@@ -87,8 +88,6 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout toggle split
-bindsym $mod+t layout tabbed
-# bindsym $mod+space layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -177,13 +176,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        position top
-        status_command i3status -c /home/david/.config/i3status/i3status.conf
-}
-
 # Borders and Gaps
 default_border pixel 1
 default_floating_border pixel 1
@@ -204,5 +196,4 @@ for_window [class="resolve"] move to workspace $ws9
 
 # TODO Customize ROFI and add in other ROFI tools (like emoji/calculator/whatever) theme with rofie-theme-selector
 # TODO New greeter, maybe TUI?
-# TODO Pimp Neovim setup
 # TODO Setup auto workspace setups with python
