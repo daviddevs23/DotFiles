@@ -5,13 +5,8 @@
 ----cheatsheet nvim
 ----DAP
 ----Git Integration
-----Better window navigation - nvim window
-----Easier finding words
+----Better window navigation - nvim window vs barbar - maybe split tabs up into workspaces?
 ----treesitter
-----cmp-git
-----cmp-dadbod for database completion
-----cmp-spell checking - null ls
-----better auto pairs for brackets and stuff
 
 -- Set options
 vim.opt.softtabstop = 4
@@ -158,10 +153,12 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
+        { name = 'vim-dadbod-completion' },
     }, {
         { name = 'buffer' },
         { name = 'path' },
         { name = 'luasnip' },
+        { name = 'spell' },
     })
 })
 
@@ -213,6 +210,12 @@ require 'lspconfig'.gopls.setup {
 
 -- Bash
 require 'lspconfig'.bashls.setup {
+    capabilities = capabilities,
+    on_attach = custom_attach,
+}
+
+-- Javascript/Typescript
+require 'lspconfig'.tsserver.setup {
     capabilities = capabilities,
     on_attach = custom_attach,
 }
@@ -276,9 +279,23 @@ require("presence"):setup({
     line_number_text    = nil,
 })
 
--- Plugins
+-- Automatically install packer
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+    packer_bootstrap = fn.system {
+        "git",
+        "clone",
+        "--depth",
+        "1",
+        "https://github.com/wbthomason/packer.nvim",
+        install_path,
+    }
+    print "Installing packer close and reopen Neovim..."
+    vim.cmd [[packadd packer.nvim]]
+end
+
+-- Plugins
 if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
         install_path })
@@ -319,6 +336,7 @@ return require('packer').startup(function(use)
     use "saadparwaiz1/cmp_luasnip"
     use "L3MON4D3/LuaSnip"
     use "rafamadriz/friendly-snippets"
+    use 'kristijanhusak/vim-dadbod-completion'
 
     use 'andweeb/presence.nvim'
     use { "akinsho/toggleterm.nvim", tag = 'v1.*', config = function()
