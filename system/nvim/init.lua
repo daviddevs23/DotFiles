@@ -1,12 +1,21 @@
 -- TODO:
 ----Figure out tag list and jump list
-----Add Telescope
 ----Add lua snippets
 ----cheatsheet nvim
 ----DAP
 ----Git Integration
-----Better window navigation - nvim window vs barbar - maybe split tabs up into workspaces?
+----Better window splitting and movement
 ----treesitter
+----ansiblels
+----spell correction but only on text files
+----make a plugin for git smashing?? Or git fugitive?
+----make a plugin for running files
+----make a plugin for TODO (Like a popup window with a todo list)
+----figure out luasnips
+----dadbod ui
+----refactor so that the code doesn't look like crap
+----firenvim with firefox
+----better bracket matching (for things like html tags too)
 
 -- Set options
 vim.opt.softtabstop = 4
@@ -40,13 +49,11 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.g.loglevel = "debug"
 vim.g.presenceloglevel = "debug"
-
+vim.g.mapleader = " "
 
 -- Key remaps
 local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
-
-vim.g.mapleader = " "
 
 -- Remap nav keys on to the right
 keymap("n", ";", "l", opts)
@@ -68,6 +75,8 @@ keymap("v", "kj", "<ESC>", opts)
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
+-- Telescope
+keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
 
 -- Gotta make it stylish af
 local colorscheme = "gruvbox"
@@ -95,6 +104,16 @@ require('lualine').setup {
         lualine_x = { 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' }
+    },
+}
+
+-- Telescope
+require('telescope').setup {
+    -- ctrl v will vertical split the current prompted file
+    -- ctrl x will horizontal split the current prompted file
+    -- ctrl t will open in a new tab the current prompted file
+    defaults = {
+        prompt_prefix = ">> "
     },
 }
 
@@ -180,7 +199,6 @@ local custom_attach = function()
     vim.keymap.set("n", "cd", vim.lsp.buf.code_action, { buffer = 0 })
     -- code formatting
     vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, { buffer = 0 })
-    -- vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", {buffer=0})
 end
 
 -- Python
@@ -221,17 +239,9 @@ require 'lspconfig'.tsserver.setup {
 }
 
 -- Lua
-local sumneko_binary_path = vim.fn.exepath('lua-language-server')
-local sumneko_root_path = vim.fn.fnamemodify(sumneko_binary_path, ':h:h:h')
-
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
 require 'lspconfig'.sumneko_lua.setup {
     capabilities = capabilities,
     on_attach = custom_attach,
-    cmd = { sumneko_binary_path, "-E", sumneko_root_path .. "/main.lua" };
     settings = {
         Lua = {
             runtime = {
@@ -316,6 +326,12 @@ return require('packer').startup(function(use)
     use "wbthomason/packer.nvim"
     use "nvim-lua/popup.nvim"
     use "nvim-lua/plenary.nvim"
+    use "BurntSushi/ripgrep"
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = { { 'nvim-lua/plenary.nvim' } }
+    }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     use "gruvbox-community/gruvbox"
     use "ap/vim-css-color"
@@ -329,6 +345,7 @@ return require('packer').startup(function(use)
     }
 
     use "neovim/nvim-lspconfig"
+    use "williamboman/nvim-lsp-installer"
     use "hrsh7th/nvim-cmp"
     use 'hrsh7th/cmp-nvim-lsp'
     use "hrsh7th/cmp-buffer"
