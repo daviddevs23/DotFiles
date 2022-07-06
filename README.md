@@ -13,6 +13,3 @@
 * Custom pacman settings
 * ZSH setup
 * Udisk2, bluetooth, and other utilities
-
-
-- [ ] Hello
