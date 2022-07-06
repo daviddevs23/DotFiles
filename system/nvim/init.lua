@@ -1,21 +1,16 @@
 -- TODO:
-----Figure out tag list and jump list
-----Add lua snippets
 ----cheatsheet nvim
 ----DAP
-----Git Integration
-----Better window splitting and movement
+----Work with git from Nvim
+----Better split movement
 ----treesitter
-----ansiblels
-----spell correction but only on text files
 ----make a plugin for git smashing?? Or git fugitive?
 ----make a plugin for running files
 ----make a plugin for TODO (Like a popup window with a todo list)
 ----figure out luasnips
-----dadbod ui
 ----refactor so that the code doesn't look like crap
-----firenvim with firefox
 ----better bracket matching (for things like html tags too)
+----break monolithic file into smaller files to fix shit
 
 -- Set options
 vim.opt.softtabstop = 4
@@ -77,6 +72,9 @@ keymap("v", ">", ">gv", opts)
 
 -- Telescope
 keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
+
+-- Nvim Navigation
+keymap("n", "<leader>w", ":lua require('nvim-window').pick()<CR>", opts)
 
 -- Gotta make it stylish af
 local colorscheme = "gruvbox"
@@ -142,7 +140,6 @@ keymap('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
 keymap('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
 keymap('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 
-
 -- CMP Completion
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -161,10 +158,6 @@ cmp.setup({
         documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ['<Tab>'] = cmp.mapping.select_next_item(),
         ['<S-Tab>'] = cmp.mapping.select_prev_item(),
@@ -172,7 +165,7 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
-        { name = 'vim-dadbod-completion' },
+        { name = 'nvim_lua' },
     }, {
         { name = 'buffer' },
         { name = 'path' },
@@ -238,6 +231,12 @@ require 'lspconfig'.tsserver.setup {
     on_attach = custom_attach,
 }
 
+-- Ansible 
+require 'lspconfig'.ansiblels.setup {
+    capabilities = capabilities,
+    on_attach = custom_attach,
+}
+
 -- Lua
 require 'lspconfig'.sumneko_lua.setup {
     capabilities = capabilities,
@@ -260,6 +259,13 @@ require 'lspconfig'.sumneko_lua.setup {
         },
     },
 }
+
+-- Gitsigns
+require('gitsigns').setup()
+
+-- Nvim Markdown Preview
+vim.g.nvim_markdown_preview_theme = "github"
+vim.g.nvim_markdown_preview_format = "markdown"
 
 -- toggle term
 require("toggleterm").setup {
@@ -343,6 +349,7 @@ return require('packer').startup(function(use)
         'romgrk/barbar.nvim',
         requires = { 'kyazdani42/nvim-web-devicons' }
     }
+    use "https://gitlab.com/yorickpeterse/nvim-window.git"
 
     use "neovim/nvim-lspconfig"
     use "williamboman/nvim-lsp-installer"
@@ -353,12 +360,13 @@ return require('packer').startup(function(use)
     use "saadparwaiz1/cmp_luasnip"
     use "L3MON4D3/LuaSnip"
     use "rafamadriz/friendly-snippets"
-    use 'kristijanhusak/vim-dadbod-completion'
 
     use 'andweeb/presence.nvim'
     use { "akinsho/toggleterm.nvim", tag = 'v1.*', config = function()
         require("toggleterm").setup()
     end }
+    use "davidgranstrom/nvim-markdown-preview"
+    use 'lewis6991/gitsigns.nvim'
 
     if packer_bootstrap then
         require('packer').sync()
