@@ -1,9 +1,6 @@
 -- TODO:
 ----cheatsheet nvim
 ----DAP
-----Work with git from Nvim
-----Better split movement
-----treesitter
 ----make a plugin for git smashing?? Or git fugitive?
 ----make a plugin for running files
 ----make a plugin for TODO (Like a popup window with a todo list)
@@ -14,10 +11,7 @@
 ----checkout comment.nvim
 ----code runner
 ----checkout scrolling section
-----nvim-spectre
-----nvim-autopairs as a possible replacement
 ----testing plugins?
-----remote developement?
 ----spellsitter
 
 -- Set options
@@ -268,12 +262,26 @@ require 'lspconfig'.sumneko_lua.setup {
     },
 }
 
+-- Treesitter
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "cpp", "c", "go", "bash", "javascript", "typescript", "lua", "rust", "python" },
+  sync_install = false,
+  auto_install = true,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+}
+
 -- Gitsigns
 require('gitsigns').setup()
 
 -- Nvim Markdown Preview
 vim.g.nvim_markdown_preview_theme = "github"
 vim.g.nvim_markdown_preview_format = "markdown"
+
+-- NVIM Autopairs
+require("nvim-autopairs").setup {}
 
 -- Indent Blankline
 vim.cmd [[highlight IndentBlanklineIndent1 guibg=#282828 gui=nocombine]]
@@ -367,7 +375,7 @@ return require('packer').startup(function(use)
     use "gruvbox-community/gruvbox"
     use "ap/vim-css-color"
 
-    use "jiangmiao/auto-pairs" -- Get a different one
+    use "windwp/nvim-autopairs"
     use 'nvim-lualine/lualine.nvim'
     use "kyazdani42/nvim-web-devicons"
     use {
@@ -393,6 +401,7 @@ return require('packer').startup(function(use)
     use "davidgranstrom/nvim-markdown-preview"
     use 'lewis6991/gitsigns.nvim'
     use "lukas-reineke/indent-blankline.nvim"
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
     if packer_bootstrap then
         require('packer').sync()
