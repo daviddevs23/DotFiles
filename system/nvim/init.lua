@@ -11,6 +11,14 @@
 ----refactor so that the code doesn't look like crap
 ----better bracket matching (for things like html tags too)
 ----break monolithic file into smaller files to fix shit
+----checkout comment.nvim
+----code runner
+----checkout scrolling section
+----nvim-spectre
+----nvim-autopairs as a possible replacement
+----testing plugins?
+----remote developement?
+----spellsitter
 
 -- Set options
 vim.opt.softtabstop = 4
@@ -267,6 +275,23 @@ require('gitsigns').setup()
 vim.g.nvim_markdown_preview_theme = "github"
 vim.g.nvim_markdown_preview_format = "markdown"
 
+-- Indent Blankline
+vim.cmd [[highlight IndentBlanklineIndent1 guibg=#282828 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent2 guibg=#32302f gui=nocombine]]
+
+require("indent_blankline").setup {
+    char = "",
+    char_highlight_list = {
+        "IndentBlanklineIndent1",
+        "IndentBlanklineIndent2",
+    },
+    space_char_highlight_list = {
+        "IndentBlanklineIndent1",
+        "IndentBlanklineIndent2",
+    },
+    show_trailing_blankline_indent = false,
+}
+
 -- toggle term
 require("toggleterm").setup {
     open_mapping = [[<c-\>]],
@@ -367,6 +392,7 @@ return require('packer').startup(function(use)
     end }
     use "davidgranstrom/nvim-markdown-preview"
     use 'lewis6991/gitsigns.nvim'
+    use "lukas-reineke/indent-blankline.nvim"
 
     if packer_bootstrap then
         require('packer').sync()
