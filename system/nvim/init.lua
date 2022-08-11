@@ -1,3 +1,5 @@
+-- Cool App Idea:
+----Boilerplate command for languages
 -- TODO:
 ----cheatsheet nvim
 ----DAP
@@ -13,6 +15,8 @@
 ----checkout scrolling section
 ----testing plugins?
 ----spellsitter
+----template c++ code setup
+----harpoon?
 
 -- Set options
 vim.opt.softtabstop = 4
@@ -202,7 +206,6 @@ require 'lspconfig'.pyright.setup {
     on_attach = custom_attach,
 }
 
-
 -- C++/C
 require 'lspconfig'.clangd.setup {
     capabilities = capabilities,
@@ -284,20 +287,9 @@ vim.g.nvim_markdown_preview_format = "markdown"
 require("nvim-autopairs").setup {}
 
 -- Indent Blankline
-vim.cmd [[highlight IndentBlanklineIndent1 guibg=#282828 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent2 guibg=#32302f gui=nocombine]]
-
+vim.opt.list = true
 require("indent_blankline").setup {
-    char = "",
-    char_highlight_list = {
-        "IndentBlanklineIndent1",
-        "IndentBlanklineIndent2",
-    },
-    space_char_highlight_list = {
-        "IndentBlanklineIndent1",
-        "IndentBlanklineIndent2",
-    },
-    show_trailing_blankline_indent = false,
+    show_end_of_line = true,
 }
 
 -- toggle term

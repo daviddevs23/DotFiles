@@ -13,3 +13,8 @@
 * Custom pacman settings
 * ZSH setup
 * Udisk2, bluetooth, and other utilities
+
+
+## Things to remmeber to do
+* Tower defense game
+* Figure out pipewire scripting
