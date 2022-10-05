@@ -1,4 +1,4 @@
 # entry point for running everything
 
-def runall():
+def run():
     pass

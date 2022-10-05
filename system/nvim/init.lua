@@ -206,6 +206,12 @@ require 'lspconfig'.pyright.setup {
     on_attach = custom_attach,
 }
 
+-- Python
+require 'lspconfig'.jedi_language_server.setup {
+    capabilities = capabilities,
+    on_attach = custom_attach,
+}
+
 -- C++/C
 require 'lspconfig'.clangd.setup {
     capabilities = capabilities,
@@ -236,7 +242,7 @@ require 'lspconfig'.tsserver.setup {
     on_attach = custom_attach,
 }
 
--- Ansible 
+-- Ansible
 require 'lspconfig'.ansiblels.setup {
     capabilities = capabilities,
     on_attach = custom_attach,
@@ -266,14 +272,14 @@ require 'lspconfig'.sumneko_lua.setup {
 }
 
 -- Treesitter
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "cpp", "c", "go", "bash", "javascript", "typescript", "lua", "rust", "python" },
-  sync_install = false,
-  auto_install = true,
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
+require 'nvim-treesitter.configs'.setup {
+    ensure_installed = { "cpp", "c", "go", "bash", "javascript", "typescript", "lua", "rust", "python" },
+    sync_install = false,
+    auto_install = true,
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
 }
 
 -- Gitsigns
@@ -387,7 +393,7 @@ return require('packer').startup(function(use)
     use "rafamadriz/friendly-snippets"
 
     use 'andweeb/presence.nvim'
-    use { "akinsho/toggleterm.nvim", tag = 'v1.*', config = function()
+    use { "akinsho/toggleterm.nvim", tag = '*', config = function()
         require("toggleterm").setup()
     end }
     use "davidgranstrom/nvim-markdown-preview"

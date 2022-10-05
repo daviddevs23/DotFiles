@@ -117,16 +117,16 @@ set $ws10 "10"
 
 # Allow workspaces to go to any monitor
 # TODO Test this later or explore alternative ideas
-# workspace $ws1 output DP-2 DP-1 HDMI-0
-# workspace $ws2 output DP-2 DP-1 HDMI-0
-# workspace $ws3 output DP-2 DP-1 HDMI-0
-# workspace $ws4 output DP-2 DP-1 HDMI-0
-# workspace $ws5 output DP-2 DP-1 HDMI-0
-# workspace $ws6 output DP-2 DP-1 HDMI-0
-# workspace $ws7 output DP-2 DP-1 HDMI-0
-# workspace $ws8 output DP-2 DP-1 HDMI-0
-# workspace $ws9 output DP-2 DP-1 HDMI-0
-# workspace $ws10 output DP-2 DP-1 HDMI-0
+workspace "1: Status" output HDMI-0
+workspace "2: Social" output HDMI-0
+workspace "3: Sound" output HDMI-0
+workspace "4: ASDF" output DP-2
+workspace "5: AAAA" output DP-2
+workspace "6: BBBB" output DP-2
+workspace "7: CCCC" output DP-2
+workspace "8: DDDD" output DP-1
+workspace "9: EEEE" output DP-1
+workspace "10: FFFF" output DP-1
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -192,7 +192,6 @@ client.urgent #d65d0e #d65d0e #d65d0e #d65d0e #d65d0e
 # use xprop to get class name of program, should be WM_CLASS(STRING) = "Not this one", "this one to use" 
 # this example is to always have resolve open on workspace 9
 for_window [class="resolve"] move to workspace $ws9
-
 
 # TODO Customize ROFI and add in other ROFI tools (like emoji/calculator/whatever) theme with rofie-theme-selector
 # TODO New greeter, maybe TUI?
