@@ -41,3 +41,11 @@ require("presence"):setup({
     workspace_text      = nil,
     line_number_text    = nil,
 })
+
+-- Pomodor Timer
+require("pomodoro").setup({
+    time_work = 25,
+    time_break_short = 5,
+    time_break_long = 20,
+    timers_to_long_break = 4
+})

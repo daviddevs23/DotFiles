@@ -80,6 +80,11 @@ return require("packer").startup(function(use)
     use "theHamsta/nvim-dap-virtual-text"
     use "nvim-telescope/telescope-dap.nvim"
 
+    use {
+        "wthollingsworth/pomodoro.nvim",
+        requires = "MunifTanjim/nui.nvim"
+    }
+
     if packer_bootstrap then
         require("packer").sync()
     end
