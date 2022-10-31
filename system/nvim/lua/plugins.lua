@@ -85,10 +85,6 @@ return require("packer").startup(function(use)
         requires = "MunifTanjim/nui.nvim"
     }
 
-    -- My own plugins for testing
-
-    use "/home/david/Code/trailingSpace.nvim"
-
     if packer_bootstrap then
         require("packer").sync()
     end

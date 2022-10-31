@@ -21,6 +21,8 @@
 ----test autosaving features
 ----refactor and break up monolithic config
 ----figure out what the heck winbar is
+----add the ability to hide and fold functions
+----fix the replace function
 
 require("plugins")
 require("options")

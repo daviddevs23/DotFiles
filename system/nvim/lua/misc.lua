@@ -50,7 +50,3 @@ require("pomodoro").setup({
     timers_to_long_break = 4
 })
 
-require("trailingSpace").setup({
-    heck = "true",
-    yeah = "false"
-})

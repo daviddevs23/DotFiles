@@ -28,3 +28,9 @@ require("lualine").setup {
 
 -- Highlight hex collors
 require("colorizer").setup()
+
+vim.api.nvim_create_autocmd(
+    { "BufEnter" },
+    { pattern = { "*" },
+        command = "normal zR", }
+)
