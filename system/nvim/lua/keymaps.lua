@@ -2,17 +2,6 @@
 local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
 
--- Remap nav keys on to the right
-keymap("n", ";", "l", opts)
-keymap("n", "l", "k", opts)
-keymap("n", "k", "j", opts)
-keymap("n", "j", "h", opts)
-
-keymap("v", ";", "l", opts)
-keymap("v", "l", "k", opts)
-keymap("v", "k", "j", opts)
-keymap("v", "j", "h", opts)
-
 keymap("i", "jk", "<ESC>", opts)
 keymap("i", "kj", "<ESC>", opts)
 keymap("v", "jk", "<ESC>", opts)

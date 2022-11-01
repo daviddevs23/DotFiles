@@ -23,6 +23,8 @@
 ----figure out what the heck winbar is
 ----add the ability to hide and fold functions
 ----fix the replace function
+----replace lsp installer with mason
+----auto pairs
 
 require("plugins")
 require("options")
