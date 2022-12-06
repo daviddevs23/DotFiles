@@ -25,6 +25,9 @@
 ----fix the replace function
 ----replace lsp installer with mason
 ----auto pairs
+----dashboard-nvim
+----nvim tree?
+----pop up in the corner that tells you how many consecutive keys you have pressed
 
 require("plugins")
 require("options")

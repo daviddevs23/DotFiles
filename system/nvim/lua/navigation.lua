@@ -9,4 +9,7 @@ require("telescope").setup {
 }
 
 -- Barbar
--- Keymaps are in keymap.lua
+require'bufferline'.setup {
+  hide = {inactive = true},
+  clickable = false,
+}

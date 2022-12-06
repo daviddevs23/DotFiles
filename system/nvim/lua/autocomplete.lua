@@ -18,7 +18,7 @@ if cmp ~= nil then
         },
         mapping = cmp.mapping.preset.insert({
             -- TODO: Change the autocomplete confirm key to something that isn"t the freaking new line key
-            ["<CR>"] = cmp.mapping.confirm({ select = true }),
+            ["<S-CR>"] = cmp.mapping.confirm({ select = true }),
             ["<Tab>"] = cmp.mapping.select_next_item(),
             ["<S-Tab>"] = cmp.mapping.select_prev_item(),
         }),
