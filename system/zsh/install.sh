@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install dependencies
-yay -S zsh git zsh-completions curl wget ttf-dejavu ttf-meslo-nerd-font-powerlevel10k
+yay -S zsh git zsh-completions curl wget ttf-dejavu ttf-meslo-nerd-font-powerlevel10k nerd-fonts-complete
 
 # install omzsh and change shell
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

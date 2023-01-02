@@ -109,6 +109,12 @@ require("lspconfig").emmet_ls.setup{
     on_attach = custom_attach,
 }
 
+-- svelte
+require("lspconfig").svelte.setup{
+    capabilities = capabilities,
+    on_attach = custom_attach,
+}
+
 -- Lua
 require("lspconfig").sumneko_lua.setup {
     capabilities = capabilities,
