@@ -10,7 +10,7 @@ cd $HOME
 yay -S udisks2 xdg-desktop-portal xdg-desktop-portal-wlr grim qt6-wayland qt5-wayland
 sudo systemctl enable udisks2
 
-yay -S easyeffects nfs-utils
+yay -S easyeffects nfs-utils freecad kicad kicad-library
 
 # etc/fstab additions
 # 10.18.39.3:/export/Mass /Mass  nfs      defaults    0       0
