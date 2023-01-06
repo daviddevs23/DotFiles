@@ -24,9 +24,12 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 ### Output configuration
-#
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/background.png fill scale 1.25
+#output * bg /usr/share/backgrounds/sway/background.png fill scale 1.25
+output HDMI-A-1 transform 270 pos 0 0 bg /usr/share/backgrounds/sway/background1.png fill
+output DP-2 pos 1080 0 bg /usr/share/backgrounds/sway/background1.png fill
+output DP-1 pos 4920 10 bg /usr/share/backgrounds/sway/background1.png fill
+
     # Start a terminal
     bindsym $mod+Return exec $term
 
