@@ -1,0 +1,54 @@
+[{
+	"layer": "top",
+	"output": "DP-2",
+    "height": 40, // Waybar height (to be removed for auto height)
+    "spacing": 0, // Gaps between modules
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "cpu", "memory", "temperature", "network", "tray"],
+    "sway/workspaces": {
+        "disable-click": true,
+        "disable-scroll": true,
+        "all-outputs": false,
+        "format": "{name}",
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "interval": 1,
+        "format": "{:%A, %B %e   %I:%M:%S %p}"
+    },
+    "cpu": {
+        "format": "CPU: {}%",
+    },
+    "memory": {
+        "format": "MEM: {}%"
+    },
+    "temperature": {
+        "format": "{temperatureC}°C",
+    },
+    "network": {
+        "format": "{ipaddr}",
+    },
+    "pulseaudio": {
+        "format": "Vol: {volume}%",
+    },
+}, {
+	"layer": "top",
+	"output": ["DP-1", "HDMI-A-1"],
+    "height": 20, // Waybar height (to be removed for auto height)
+    "spacing": 0, // Gaps between modules
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["clock"],
+    "sway/workspaces": {
+        "disable-click": true,
+        "disable-scroll": true,
+        "all-outputs": false,
+        "format": "{name}",
+    },
+    "clock": {
+        "interval": 1,
+        "format": "{:%A, %B %e   %I:%M:%S %p}"
+    },
+}]
