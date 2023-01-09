@@ -30,8 +30,8 @@ button:hover {
 
 #workspaces button {
     padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
+    background-color: #7c6f64;
+    color: #000000;
 }
 
 #workspaces button:hover {
@@ -39,8 +39,8 @@ button:hover {
 }
 
 #workspaces button.focused {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
+    background-color: #a89984;
+    box-shadow: inset 0 -3px #665c54;
 }
 
 #workspaces button.urgent {

@@ -1,7 +1,7 @@
 [{
 	"layer": "top",
 	"output": "DP-2",
-    "height": 40, // Waybar height (to be removed for auto height)
+    "height": 30, // Waybar height (to be removed for auto height)
     "spacing": 0, // Gaps between modules
     "modules-left": ["sway/workspaces"],
     "modules-center": ["clock"],
