@@ -20,6 +20,13 @@ button {
     box-shadow: inset 0 -3px transparent;
     border: none;
     border-radius: 0;
+    box-shadow: inset 0 -3px #3c3836;
+}
+
+#workspaces button.visible {
+    border: none;
+    border-radius: 0;
+    box-shadow: inset 0 -3px #665c54;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -35,7 +42,7 @@ button:hover {
 }
 
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: #7c6f64;
 }
 
 #workspaces button.focused {

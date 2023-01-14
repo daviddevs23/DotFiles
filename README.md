@@ -7,14 +7,14 @@
 * Special config tools for edge case software
 
 
-## Things to remmeber to do
+## Things to remember to do
 * Install software
 * Set up config files
 * Custom pacman settings
 * ZSH setup
 * Udisk2, bluetooth, and other utilities
+* Backup obs settings
 
 
 ## Things to remmeber to do
 * Tower defense game
-* Figure out pipewire scripting
