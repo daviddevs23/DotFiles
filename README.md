@@ -17,4 +17,4 @@
 
 
 ## Things to remmeber to do
-* Tower defense game
+* Automate github
