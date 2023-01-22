@@ -7,7 +7,7 @@ cd yay
 makepkg -si
 cd $HOME
 
-yay -S udisks2 xdg-desktop-portal xdg-desktop-portal-wlr grim qt6-wayland qt5-wayland xdg-desktop-portal-gnome
+yay -S udisks2 xdg-desktop-portal xdg-desktop-portal-wlr grim qt6-wayland qt5-wayland
 sudo systemctl enable udisks2
 
 yay -S easyeffects nfs-utils freecad kicad kicad-library gruvbox-material-gtk-theme-git gruvbox-material-icon-theme-git
