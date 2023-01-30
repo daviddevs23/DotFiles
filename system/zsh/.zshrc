@@ -106,6 +106,9 @@ source $ZSH/oh-my-zsh.sh
 
 alias ls="lsd"
 alias vim="nvim"
+alias vpn="f5fpc --start --host https://vpn.mtu.edu --user dehochst -x"
+
+export PATH="$PATH:$HOME/.local/bin"
 
 export SDL_VIDEODRIVER=wayland
 export _JAVA_AWT_WM_NONREPARENTING=1

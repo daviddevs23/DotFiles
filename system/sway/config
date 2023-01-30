@@ -27,8 +27,12 @@ exec hash dbus-update-activation-environment 2>/dev/null && dbus-update-activati
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/background.png fill scale 1.25
 output HDMI-A-1 transform 270 pos 0 0 bg /usr/share/backgrounds/sway/background1.png fill
-output DP-2 pos 1080 0 bg /usr/share/backgrounds/sway/background1.png fill
-output DP-1 pos 4920 10 bg /usr/share/backgrounds/sway/background1.png fill
+output DP-1 scale 1.5 pos 1080 0 bg /usr/share/backgrounds/sway/background1.png fill
+output DP-2 pos 3640 10 bg /usr/share/backgrounds/sway/background1.png fill
+
+workspace 10 output HDMI-A-1
+workspace 1 output DP-1
+workspace 8 output DP-2
 
     # Start a terminal
     bindsym $mod+Return exec $term

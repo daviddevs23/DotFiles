@@ -1,11 +1,11 @@
 [{
 	"layer": "top",
-	"output": "DP-2",
-    "height": 30, // Waybar height (to be removed for auto height)
+	"output": "DP-1",
+    "height": 40, // Waybar height (to be removed for auto height)
     "spacing": 0, // Gaps between modules
     "modules-left": ["sway/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "cpu", "memory", "temperature", "network", "tray"],
+    "modules-right": ["pulseaudio", "custom/spacer", "cpu", "custom/spacer", "memory", "custom/spacer", "network", "tray"],
     "sway/workspaces": {
         "disable-click": true,
         "disable-scroll": true,
@@ -21,6 +21,7 @@
     },
     "cpu": {
         "format": "CPU: {}%",
+        "interval": 10,
     },
     "memory": {
         "format": "MEM: {}%"
@@ -34,9 +35,12 @@
     "pulseaudio": {
         "format": "Vol: {volume}%",
     },
+    "custom/spacer": {
+        "format": "|",
+    },
 }, {
 	"layer": "top",
-	"output": ["DP-1", "HDMI-A-1"],
+	"output": ["DP-2", "HDMI-A-1"],
     "height": 20, // Waybar height (to be removed for auto height)
     "spacing": 0, // Gaps between modules
     "modules-left": ["sway/workspaces"],
