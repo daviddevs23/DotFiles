@@ -84,8 +84,6 @@ return require("packer").startup(function(use)
         "wthollingsworth/pomodoro.nvim",
         requires = "MunifTanjim/nui.nvim"
     }
-    use {'glepnir/dashboard-nvim'}
-
     if packer_bootstrap then
         require("packer").sync()
     end
