@@ -115,6 +115,12 @@ require("lspconfig").svelte.setup{
     on_attach = custom_attach,
 }
 
+-- arduino
+require'lspconfig'.arduino_language_server.setup{
+    capabilities = capabilities,
+    on_attach = custom_attach,
+}
+
 -- Lua
 require("lspconfig").sumneko_lua.setup {
     capabilities = capabilities,

@@ -30,11 +30,12 @@
 ----pop up in the corner that tells you how many consecutive keys you have pressed
 
 require("plugins")
+require("treesitter")
 require("options")
 require("cosmetics")
 require("keymaps")
 require("navigation")
-require("autocomplete")
-require("debug")
 require("misc")
-require("treesitter")
+require("autocomplete")
+
+require("debugging")
