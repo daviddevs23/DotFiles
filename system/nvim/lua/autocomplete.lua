@@ -122,7 +122,7 @@ require'lspconfig'.arduino_language_server.setup{
 }
 
 -- Lua
-require("lspconfig").sumneko_lua.setup {
+require("lspconfig").lua_ls.setup {
     capabilities = capabilities,
     on_attach = custom_attach,
     settings = {
