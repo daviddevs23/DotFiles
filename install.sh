@@ -15,7 +15,7 @@ sudo systemctl enable udisks2
 xdg-user-dirs-update
 
 yay -S gruvbox-material-gtk-theme-git gruvbox-material-icon-theme-git lxappearance xfce4-settings
-yay -S mesa-utils ocrmypdf freecad kicad kicad-library kitty discord firefox chromium
+yay -S mesa-utils ocrmypdf freecad kicad kicad-library discord firefox chromium
 
 # Apply themes
 lxappearance
