@@ -1,0 +1,5 @@
+[user]
+	email = daviddevs23@gmail.com
+	name = David Hochstetler
+[core]
+	editor = nvim
