@@ -1,0 +1,9 @@
+#! /bin/bash
+
+screenshotDir=$(xdg-user-dir PICTURES)/'screenshots/'
+image=$(xdg-user-dir PICTURES)/$(date +'screenshots/screenshot_%Y-%m-%d-%H%M%S.png')
+
+[ ! -d $screenshotDir ] && mkdir -p $screenshotDir
+
+slurp | grim -g - $image
+wl-copy < $image
