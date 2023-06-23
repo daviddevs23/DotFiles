@@ -1,16 +1,14 @@
 [{
-	"layer": "top",
-	"output": "DP-1",
+    "layer": "top",
+    "output": "DP-1",
     "height": 40, // Waybar height (to be removed for auto height)
     "spacing": 0, // Gaps between modules
-    "modules-left": ["sway/workspaces"],
+    "modules-left": ["wlr/workspaces"],
     "modules-center": ["clock"],
     "modules-right": ["pulseaudio", "custom/spacer", "cpu", "custom/spacer", "memory", "custom/spacer", "network", "tray"],
-    "sway/workspaces": {
-        "disable-click": true,
-        "disable-scroll": true,
-        "all-outputs": false,
-        "format": "{name}",
+    "wlr/workspaces": {
+        "format": "{icon}",
+	"sort-by-number": true
     },
     "tray": {
         "spacing": 10
@@ -20,39 +18,39 @@
         "format": "{:%A, %B %e   %I:%M:%S %p}"
     },
     "cpu": {
-        "format": "CPU: {}%",
-        "interval": 10,
+        "format": "CPU: {usage}%",
+        "interval": 3
     },
     "memory": {
         "format": "MEM: {}%"
     },
     "temperature": {
-        "format": "{temperatureC}°C",
+        "format": "{temperatureC}°C"
     },
     "network": {
-        "format": "{ipaddr}",
+        "format": "{ipaddr}"
     },
     "pulseaudio": {
-        "format": "Vol: {volume}%",
+        "format": "Vol: {volume}%"
     },
     "custom/spacer": {
-        "format": "|",
-    },
-}, {
-	"layer": "top",
-	"output": ["DP-2", "HDMI-A-1"],
+        "format": "|"
+    }
+}, 
+
+{
+    "layer": "top",
+    "output": ["DP-2", "HDMI-A-1"],
     "height": 20, // Waybar height (to be removed for auto height)
     "spacing": 0, // Gaps between modules
-    "modules-left": ["sway/workspaces"],
+    "modules-left": ["wlr/workspaces"],
     "modules-center": ["clock"],
-    "sway/workspaces": {
-        "disable-click": true,
-        "disable-scroll": true,
-        "all-outputs": false,
-        "format": "{name}",
+    "wlr/workspaces": {
+        "format": "{icon}",
+	"sort-by-number": true
     },
     "clock": {
         "interval": 1,
         "format": "{:%A, %B %e   %I:%M:%S %p}"
-    },
+    }
 }]

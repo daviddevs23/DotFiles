@@ -33,7 +33,7 @@ button {
     color: #ebdbb2;
 }
 
-#workspaces button.focused {
+#workspaces button.active {
     background-color: #3c3836;
     box-shadow: inset 0 -3px #fe8019;
 }
