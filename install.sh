@@ -14,8 +14,8 @@ yay -S udisks2 slurp grim qt6-wayland qt5-wayland clipman wl-clipboard gvfs thun
 sudo systemctl enable udisks2
 xdg-user-dirs-update
 
-yay -S gruvbox-material-gtk-theme-git gruvbox-material-icon-theme-git lxappearance xfce4-settings
-yay -S mesa-utils ocrmypdf freecad kicad kicad-library discord firefox chromium
+yay -S gruvbox-material-gtk-theme-git gruvbox-material-icon-theme-git lxappearance xfce4-settings lsd
+yay -S mesa-utils ocrmypdf freecad kicad kicad-library discord firefox chromium ffmpeg
 
 # Apply themes
 lxappearance
