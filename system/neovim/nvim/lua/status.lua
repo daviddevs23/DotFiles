@@ -1,12 +1,5 @@
--- Gotta make it stylish af
-require("gruvbox").setup({
-    overrides = {
-        SignColumn = { bg = "#3c3836" }
-    }
-})
-vim.cmd("colorscheme gruvbox")
+vim.cmd([[colorscheme gruvbox]])
 
--- Lualine
 require("lualine").setup {
     options = {
         icons_enabled = true,
@@ -26,5 +19,3 @@ require("lualine").setup {
     },
 }
 
--- Highlight hex collors
-require("colorizer").setup()

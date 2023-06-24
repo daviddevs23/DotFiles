@@ -1,39 +1,4 @@
--- CMP Completion
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
--- Setup nvim-cmp.
-local cmp = require("cmp")
-
-if cmp ~= nil then
-    cmp.setup({
-        snippet = {
-            expand = function(args)
-                require("luasnip").lsp_expand(args.body)
-            end,
-        },
-        window = {
-            completion = cmp.config.window.bordered(),
-            documentation = cmp.config.window.bordered(),
-        },
-        mapping = cmp.mapping.preset.insert({
-            -- TODO: Change the autocomplete confirm key to something that isn"t the freaking new line key
-            ["<S-CR>"] = cmp.mapping.confirm({ select = true }),
-            ["<Tab>"] = cmp.mapping.select_next_item(),
-            ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-        }),
-        sources = cmp.config.sources({
-            { name = "nvim_lsp" },
-            { name = "luasnip" },
-            { name = "nvim_lua" },
-        }, {
-            { name = "buffer" },
-            { name = "path" },
-            { name = "luasnip" },
-            { name = "spell" },
-        })
-    })
-end
 
 -- LSP
 local custom_attach = function()
@@ -52,7 +17,11 @@ local custom_attach = function()
     -- code actions
     vim.keymap.set("n", "cd", vim.lsp.buf.code_action, { buffer = 0 })
     -- code formatting
-    vim.keymap.set("n", "<space>f", vim.lsp.buf.format, { buffer = 0 })
+    vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { buffer = 0 })
+    -- get all references
+    vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { buffer = 0 })
+    -- get all implementations
+    vim.keymap.set("n", "<leader>gr", vim.lsp.buf.implementation, { buffer = 0 })
 end
 
 -- Python
@@ -61,13 +30,7 @@ require("lspconfig").pyright.setup {
     on_attach = custom_attach,
 }
 
--- Python
-require("lspconfig").jedi_language_server.setup {
-    capabilities = capabilities,
-    on_attach = custom_attach,
-}
-
--- C++/C
+-- C/C++
 require("lspconfig").clangd.setup {
     capabilities = capabilities,
     on_attach = custom_attach,
@@ -79,44 +42,32 @@ require("lspconfig").rust_analyzer.setup {
     on_attach = custom_attach,
 }
 
--- Golang
+-- GoLang
 require("lspconfig").gopls.setup {
     capabilities = capabilities,
     on_attach = custom_attach,
 }
 
--- Bash
+-- Bash/ZSH
 require("lspconfig").bashls.setup {
     capabilities = capabilities,
     on_attach = custom_attach,
 }
 
 -- Javascript/Typescript
-require("lspconfig").tsserver.setup {
+require("lspconfig").denols.setup {
     capabilities = capabilities,
     on_attach = custom_attach,
 }
 
--- Ansible
-require("lspconfig").ansiblels.setup {
+-- Javascript/Typescript
+require("lspconfig").eslint.setup {
     capabilities = capabilities,
     on_attach = custom_attach,
 }
 
--- HTML and CSS
-require("lspconfig").emmet_ls.setup{
-    capabilities = capabilities,
-    on_attach = custom_attach,
-}
-
--- svelte
-require("lspconfig").svelte.setup{
-    capabilities = capabilities,
-    on_attach = custom_attach,
-}
-
--- arduino
-require'lspconfig'.arduino_language_server.setup{
+-- HTML/CSS
+require("lspconfig").tailwindcss.setup {
     capabilities = capabilities,
     on_attach = custom_attach,
 }
