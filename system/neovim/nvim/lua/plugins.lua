@@ -37,6 +37,37 @@ return require("packer").startup(function(use)
         requires = { "nvim-tree/nvim-web-devicons", opt = true }
     }
 
+    -- Telescope
+    use "BurntSushi/ripgrep"
+    use {
+        "nvim-telescope/telescope.nvim",
+        requires = { { "nvim-lua/plenary.nvim" } }
+    }
+    use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+
+    -- Treesitter
+    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+
+    -- Discord Presence
+    use "andweeb/presence.nvim"
+
+    -- Toggleterm
+    use { "akinsho/toggleterm.nvim", tag = "*", config = function()
+        require("toggleterm").setup()
+    end }
+
+    -- Colorizer
+    use "norcalli/nvim-colorizer.lua"
+
+    -- Better Looking Indents
+    use "lukas-reineke/indent-blankline.nvim"
+
+    -- Markdown Preview
+    use "davidgranstrom/nvim-markdown-preview"
+
+    -- Autopair
+    use "windwp/nvim-autopairs"
+
     if packer_bootstrap then
         require("packer").sync()
     end
