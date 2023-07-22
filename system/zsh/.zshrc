@@ -25,6 +25,10 @@ alias vpn="f5fpc --start --host https://vpn.mtu.edu --user dehochst -x"
 alias mine="xmrig --donate-level 5 -o xmr-eu1.nanopool.org:14433 -u 42VHNrVBTK95LvdyhfdSVegPfSHL4N7oeLDCiT7kjER3W8TjXQ4YfoVFuLhXPoXH4j9Fv31fEVnVKASuV6hA71cMLSgHNKm --tls -t 16 --coin monero"
 alias convertForResolve="mkdir transcoded; for i in *.mp4; do ffmpeg -i "$i" -vcodec mjpeg -q:v 2 -acodec pcm_s16be -q:a 0 -f mov "transcoded/${i%.*}.mov"; done"
 
+# docker pull rocm/tensorflow:latest
+alias drun='sudo docker run -it --network=host --device=/dev/kfd --device=/dev/dri --ipc=host --shm-size 16G --group-add video --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -v $HOME/dockerx:/dockerx'
+# drun rocm/tensorflow:latest
+
 # Path Updates
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/opt/rocm/bin/"
