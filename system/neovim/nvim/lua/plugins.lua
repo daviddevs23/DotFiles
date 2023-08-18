@@ -48,9 +48,6 @@ return require("packer").startup(function(use)
     -- Treesitter
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
 
-    -- Discord Presence
-    use "andweeb/presence.nvim"
-
     -- Toggleterm
     use { "akinsho/toggleterm.nvim", tag = "*", config = function()
         require("toggleterm").setup()
@@ -67,6 +64,15 @@ return require("packer").startup(function(use)
 
     -- Autopair
     use "windwp/nvim-autopairs"
+
+    -- Harpoon
+    use {
+        "ThePrimeagen/harpoon",
+        requires = { { "nvim-lua/plenary.nvim" } }
+    }
+
+    -- Test Python Plugin
+    use "/home/david/DotFiles/system/neovim/nvim/lua/plugin.py"
 
     if packer_bootstrap then
         require("packer").sync()
