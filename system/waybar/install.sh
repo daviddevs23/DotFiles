@@ -1,4 +1,4 @@
 #!/bin/bash
 
-yay -S waybar-hyprland-git
+yay -S waybar
 ln -s $HOME/DotFiles/system/waybar/waybar $HOME/.config/

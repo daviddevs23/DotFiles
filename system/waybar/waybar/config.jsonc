@@ -3,7 +3,7 @@
     "output": "DP-1",
     "height": 40, // Waybar height (to be removed for auto height)
     "spacing": 0, // Gaps between modules
-    "modules-left": ["wlr/workspaces"],
+    "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
     "modules-right": ["pulseaudio", "custom/spacer", "cpu", "custom/spacer", "memory", "custom/spacer", "network", "tray"],
     "wlr/workspaces": {
@@ -43,7 +43,7 @@
     "output": ["DP-2", "HDMI-A-1"],
     "height": 20, // Waybar height (to be removed for auto height)
     "spacing": 0, // Gaps between modules
-    "modules-left": ["wlr/workspaces"],
+    "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
     "wlr/workspaces": {
         "format": "{icon}",
