@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yay -S zsh git zsh-completions curl wget ttf-dejavu ttf-meslo-nerd-font-powerlevel10k
+yay -S zsh git zsh-completions curl wget ttf-dejavu ttf-meslo-nerd-font-powerlevel10k nerd-fonts
 
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 

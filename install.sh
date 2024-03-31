@@ -10,20 +10,20 @@ cd $HOME
 rm -rf yay
 
 # General Setup
-yay -S udisks2 slurp grim qt6-wayland qt5-wayland clipman wl-clipboard gvfs thunar xdg-user-dirs
+yay -S udisks2 slurp grim qt6-wayland qt5-wayland clipman wl-clipboard gvfs thunar xdg-user-dirs noisetorch pavucontrol
 sudo systemctl enable udisks2
 xdg-user-dirs-update
 
 yay -S gruvbox-material-gtk-theme-git gruvbox-material-icon-theme-git lxappearance xfce4-settings lsd
-yay -S mesa-utils ocrmypdf freecad kicad kicad-library discord firefox chromium ffmpeg
+yay -S mesa-utils ocrmypdf freecad kicad kicad-library webcord firefox chromium ffmpeg
 
 # Apply themes
 lxappearance
 xfce4-appearance-settings
 
 # set up all sub scripts
-for FILE in ./system/*
-do
-    echo $FILE
-    $FILE/install.sh
-done
+# for FILE in ./system/*
+# do
+#     echo $FILE
+#     $FILE/install.sh
+# done
