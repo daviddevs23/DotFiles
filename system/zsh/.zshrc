@@ -21,7 +21,6 @@ alias la="ls -a"
 alias lla="ls -al"
 alias vim="nvim"
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
-alias mine="xmrig --donate-level 5 -o xmr-eu1.nanopool.org:14433 -u 42VHNrVBTK95LvdyhfdSVegPfSHL4N7oeLDCiT7kjER3W8TjXQ4YfoVFuLhXPoXH4j9Fv31fEVnVKASuV6hA71cMLSgHNKm --tls -t 16 --coin monero"
 alias convertForResolve="mkdir transcoded; for i in *.mp4; do ffmpeg -i "$i" -vcodec mjpeg -q:v 2 -acodec pcm_s16be -q:a 0 -f mov "transcoded/${i%.*}.mov"; done"
 #
 # Go to the root of the git folder
