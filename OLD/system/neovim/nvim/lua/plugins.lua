@@ -71,9 +71,6 @@ return require("packer").startup(function(use)
         requires = { { "nvim-lua/plenary.nvim" } }
     }
 
-    -- Test Python Plugin
-    use "/home/david/DotFiles/system/neovim/nvim/lua/plugin.py"
-
     if packer_bootstrap then
         require("packer").sync()
     end

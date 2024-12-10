@@ -9,7 +9,7 @@ ZSH_THEME=""
 
 # Plugin
 plugins=(zsh-syntax-highlighting zsh-autosuggestions)
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # Starship
 eval "$(starship init zsh)"
@@ -28,6 +28,7 @@ git_root() {
     cd $(git rev-parse --show-toplevel)
 }
 alias gr=git_root
+alias update="sudo nixos-rebuild switch"
 
 # git aliases
 alias gs="git status"
@@ -43,4 +44,3 @@ alias drun='sudo docker run -it --network=host --device=/dev/kfd --device=/dev/d
 
 # Path Updates
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:/opt/rocm/bin/"
